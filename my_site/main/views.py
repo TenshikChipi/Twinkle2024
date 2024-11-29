@@ -15,3 +15,30 @@ def summer(request):
     return render(request, "main/summer.html")
 def winter(request):
     return render(request, "main/winter.html")
+# twinkle/views.py
+from django.shortcuts import render
+from .forms import ColorTestForm
+from .models import ColorType, StyleRecommendation
+
+def home(request):
+    if request.method == 'POST':
+        form = ColorTestForm(request.POST)
+        if form.is_valid():
+            # Простой пример логики для определения цветотипа
+            score = 0
+            if form.cleaned_data['question_1'] == '1':
+                score += 1
+            if form.cleaned_data['question_2'] == '1':
+                score += 1
+
+            if score == 2:
+                color_type = ColorType.objects.get(name="Зима")
+            else:
+                color_type = ColorType.objects.get(name="Весна")
+
+            recommendations = StyleRecommendation.objects.filter(color_type=color_type)
+            return render(request, 'twinkle/result.html', {'color_type': color_type, 'recommendations': recommendations})
+
+    else:
+        form = ColorTestForm()
+    return render(request, 'twinkle/color_test.html', {'form': form})
