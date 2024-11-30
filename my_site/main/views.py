@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .forms import ColorTestForm
+from .models import ColorType, StyleRecommendation 
 def index(request):
     return render(request, "main/index.html")
 def autumn(request):
@@ -15,10 +17,6 @@ def summer(request):
     return render(request, "main/summer.html")
 def winter(request):
     return render(request, "main/winter.html")
-# twinkle/views.py
-from django.shortcuts import render
-from .forms import ColorTestForm
-from .models import ColorType, StyleRecommendation
 
 def home(request):
     if request.method == 'POST':
@@ -42,3 +40,10 @@ def home(request):
     else:
         form = ColorTestForm()
     return render(request, 'twinkle/color_test.html', {'form': form})
+from .forms import ClothingItem
+def wardrobe(request):
+    clothing_items = ClothingItem.objects.all()
+    if request.method == 'POST':
+        # Логика для добавления одежды в гардероб
+        pass
+    return render(request, 'twinkle/wardrobe.html', {'clothing_items': clothing_items})
