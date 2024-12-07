@@ -1,9 +1,0 @@
-{% extends 'twinkle/index.html' %}
-{% block content %}
-<h2>Пройдите тест, чтобы определить ваш цветотип!</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Узнать мой цветотип</button>
-</form>
-{% endblock %}

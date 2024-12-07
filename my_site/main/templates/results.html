@@ -1,8 +1,0 @@
-{% extends 'twinkle/index.html' %}
-{% block content %}
-<h2>Ваш цветотип: {{ color_type.name }}</h2>
-<p>{{ color_type.description }}</p>
-<h3>Рекомендации:</h3>
-<p><strong>Одежда:</strong> {{ recommendations.first.clothing_style }}</p>
-<p><strong>Макияж:</strong> {{ recommendations.first.makeup_style }}</p>
-{% endblock %}
